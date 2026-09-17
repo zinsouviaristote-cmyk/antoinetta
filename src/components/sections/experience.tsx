@@ -11,9 +11,9 @@ export function ExperienceSection() {
         <SectionHeading eyebrow="Expérience" title="Mon parcours" />
       </Reveal>
 
-      <div className="mt-14">
+      <div className="mt-12">
         <Reveal>
-          <h3 className="mb-8 text-lg font-semibold tracking-tight">
+          <h3 className="mb-6 text-lg font-semibold tracking-tight">
             Expérience professionnelle
           </h3>
         </Reveal>

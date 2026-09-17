@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -90,6 +91,9 @@ export function Navbar() {
             <SheetContent side="right">
               <SheetHeader>
                 <SheetTitle>Menu</SheetTitle>
+                <SheetDescription className="sr-only">
+                  Liens de navigation vers les sections du site
+                </SheetDescription>
               </SheetHeader>
               <nav
                 className="flex flex-col gap-1 px-4"

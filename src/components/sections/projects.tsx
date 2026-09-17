@@ -51,7 +51,7 @@ export function ProjectsSection() {
         <SectionHeading eyebrow="Projets" title="Réalisations récentes" />
       </Reveal>
 
-      <Tabs value={activeTag} onValueChange={setActiveTag} className="mt-10 gap-0">
+      <Tabs value={activeTag} onValueChange={setActiveTag} className="mt-12 gap-0">
         {tags.length > 2 && (
           <Reveal delay={0.1}>
             <TabsList className="h-auto flex-wrap justify-start gap-2 bg-transparent p-0">
@@ -131,7 +131,7 @@ function ProjectCard({ project }: { project: Project }) {
           href={project.live}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-brand-text"
+          className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-foreground transition-colors hover:text-brand-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <ExternalLink className="size-4" />
           Démo
@@ -140,7 +140,7 @@ function ProjectCard({ project }: { project: Project }) {
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-brand-text"
+          className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-foreground transition-colors hover:text-brand-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <GithubIcon className="size-4" />
           Code
