@@ -67,10 +67,10 @@ export const profile: Profile = {
   email: "antoinettaams@gmail.com",
   phone: "+229 01 53 99 83 59",
   socials: {
-    github: "#", // PLACEHOLDER
-    linkedin: "#", // PLACEHOLDER
-    instagram: "#", // PLACEHOLDER
-    whatsapp: "#", // PLACEHOLDER — deviendra un lien https://wa.me/
+    github: "https://github.com/antoinettaams",
+    linkedin: "https://www.linkedin.com/in/antoinette-ams-2830743b6",
+    instagram: "https://www.instagram.com/fafa.ams",
+    whatsapp: "https://wa.me/2290153998359",
   },
 }
 

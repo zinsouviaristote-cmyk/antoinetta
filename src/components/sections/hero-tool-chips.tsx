@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
+import { useEffect, useState } from "react"
 import type { ComponentType, SVGProps } from "react"
 
 import {
@@ -37,8 +38,7 @@ const TOOL_CHIPS: ToolChip[] = [
   {
     label: "JavaScript",
     Icon: JavascriptIcon,
-    position:
-      "hidden sm:block sm:-left-9 sm:top-[50%] lg:-left-14 lg:top-[48%]",
+    position: "-left-3 top-[40%] sm:-left-9 sm:top-[50%] lg:-left-14 lg:top-[48%]",
   },
   {
     label: "Tailwind CSS",
@@ -56,19 +56,27 @@ const TOOL_CHIPS: ToolChip[] = [
 
 export function HeroToolChips() {
   const shouldReduceMotion = useReducedMotion()
+  // See Reveal.tsx for why this is gated behind a post-mount flag rather
+  // than branching on shouldReduceMotion directly (SSR/CSR hydration).
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- guards against SSR/client reduced-motion hydration mismatch
+    setMounted(true)
+  }, [])
 
   return (
     <>
       {TOOL_CHIPS.map((chip, index) => {
         const chipBody = (
-          <div className="flex size-11 items-center justify-center rounded-2xl border border-border bg-card shadow-lg sm:size-12 lg:size-14">
+          <div className="flex size-10 items-center justify-center rounded-2xl border border-border bg-card shadow-lg sm:size-12 lg:size-14">
             <chip.Icon
-              className={cn("size-5 sm:size-6 lg:size-7", chip.iconClassName)}
+              className={cn("size-4 sm:size-6 lg:size-7", chip.iconClassName)}
             />
           </div>
         )
 
-        if (shouldReduceMotion) {
+        if (mounted && shouldReduceMotion) {
           return (
             <div
               key={chip.label}

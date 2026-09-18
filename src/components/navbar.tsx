@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Menu } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import { cn } from "cn"
@@ -31,10 +31,30 @@ export function Navbar() {
   const activeId = useScrollSpy(NAV_IDS)
   const shouldReduceMotion = useReducedMotion()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 sm:px-10">
+    <header
+      className={cn(
+        "sticky top-0 z-50 border-b border-border/50 backdrop-blur-md transition-colors duration-300 supports-[backdrop-filter]:bg-background/60",
+        scrolled
+          ? "bg-background/90 shadow-sm supports-[backdrop-filter]:bg-background/80"
+          : "bg-background/70"
+      )}
+    >
+      <div
+        className={cn(
+          "mx-auto flex w-full max-w-5xl items-center justify-between px-6 transition-[height] duration-300 sm:px-10",
+          scrolled ? "h-14" : "h-16"
+        )}
+      >
         <a
           href="#hero"
           className="rounded-sm font-mono text-lg font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"

@@ -39,7 +39,7 @@ export function ExperienceSection() {
                     )}
                   </div>
 
-                  <div className="-mt-1 flex-1 rounded-xl border border-transparent p-4 pt-1 transition-colors duration-300 group-hover:border-border/80 group-hover:bg-card/60">
+                  <div className="-mt-1 flex-1 rounded-xl border border-transparent p-4 pt-1 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-brand/30 group-hover:bg-card/60 group-hover:shadow-[0_16px_32px_-26px_color-mix(in_oklch,var(--brand)_40%,transparent)]">
                     <p className="font-mono text-xs text-muted-foreground sm:hidden">
                       {entry.period}
                     </p>

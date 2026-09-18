@@ -28,7 +28,7 @@ export function SkillsSection() {
 
           return (
             <Reveal key={group.category} delay={index * 0.08}>
-              <Card className="h-full bg-card/60">
+              <Card className="h-full bg-card/60 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_20px_40px_-24px_color-mix(in_oklch,var(--brand)_45%,transparent)]">
                 <CardHeader className="flex items-center gap-3">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand/10 text-brand-text">
                     <Icon className="size-5" />
