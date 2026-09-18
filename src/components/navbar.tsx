@@ -56,7 +56,7 @@ export function Navbar() {
         )}
       >
         <a
-          href="#hero"
+          href="/"
           className="rounded-sm font-mono text-lg font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           Antoinetta

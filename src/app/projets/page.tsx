@@ -3,8 +3,10 @@
 import { useMemo, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ExternalLink, ImageOff, ArrowRight } from "lucide-react"
+import { ExternalLink, ImageOff, ArrowLeft } from "lucide-react"
 
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 import { Reveal } from "@/components/reveal"
 import { Section } from "@/components/section"
 import { SectionHeading } from "@/components/section-heading"
@@ -23,91 +25,103 @@ import { projects, type Project } from "@/content/portfolio"
 
 const ALL_TAG = "Tous"
 
-// Titres des 6 projets à afficher sur l'accueil
-const FEATURED_TITLES = [
-  "Petits Savants",
-  "WellSteven",
-  "CEFORA Formation",
-  "Aure-a",
-  "Luxhe",
-  "SchoolFlow",
+// Strictement limité aux langages et frameworks de programmation
+const LANGUAGE_TAGS = [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "React Native",
+  "Next.js",
+  "Angular",
+  "HTML",
+  "CSS",
 ]
 
-// Langages et technologies essentiels uniquement
-const TECH_TAGS = ["Next.js", "React", "TypeScript", "Tailwind CSS", "AI", "SaaS"]
-
-export function ProjectsSection() {
-  const featuredProjects = useMemo(() => {
-    return projects.filter((p) =>
-      FEATURED_TITLES.some(
-        (title) => title.toLowerCase() === p.title.toLowerCase()
-      )
-    )
-  }, [])
-
+export default function AllProjectsPage() {
+  // Sélectionne uniquement les filtres de langages présents dans tes projets
   const tags = useMemo(() => {
     const unique = new Set<string>()
-    for (const project of featuredProjects) {
+    for (const project of projects) {
       for (const tag of project.tags) {
-        if (TECH_TAGS.includes(tag)) {
+        if (LANGUAGE_TAGS.includes(tag)) {
           unique.add(tag)
         }
       }
     }
     return [ALL_TAG, ...Array.from(unique)]
-  }, [featuredProjects])
+  }, [])
 
   const [activeTag, setActiveTag] = useState(ALL_TAG)
 
-  const displayedProjects =
+  // Filtrage selon le langage sélectionné
+  const filteredProjects =
     activeTag === ALL_TAG
-      ? featuredProjects
-      : featuredProjects.filter((project) => project.tags.includes(activeTag))
+      ? projects
+      : projects.filter((project) => project.tags.includes(activeTag))
 
   return (
-    <Section id="projects">
-      <Reveal>
-        <SectionHeading eyebrow="Projets" title="Réalisations récentes" />
-      </Reveal>
+    <>
+      <Navbar />
+      <main className="min-h-screen pb-12">
+        <Section id="all-projects" className="pt-2 sm:pt-4">
+          {/* Bouton retour vers la page d'accueil */}
+          <Reveal>
+            <div className="mb-4">
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="gap-2 text-muted-foreground hover:text-foreground"
+              >
+                <Link href="/">
+                  <ArrowLeft className="size-4" />
+                  Retour à l'accueil
+                </Link>
+              </Button>
+            </div>
+          </Reveal>
 
-      <Tabs value={activeTag} onValueChange={setActiveTag} className="mt-8">
-        <Reveal delay={0.1}>
-          {/* Barre supérieure : Filtres à gauche, Bouton 'Voir tous les projets' à droite */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <Reveal delay={0.05}>
+            <SectionHeading
+              eyebrow="Portfolio complet"
+              title={`Tous mes projets & réalisations (${projects.length})`}
+            />
+            <p className="mt-2 max-w-2xl text-muted-foreground">
+              Retrouvez ici l'ensemble de mes {projects.length} réalisations web : applications SaaS, plateformes sur mesure, sites vitrines et projets e-commerce.
+            </p>
+          </Reveal>
+
+          <Tabs value={activeTag} onValueChange={setActiveTag} className="mt-6">
             {tags.length > 1 && (
-              <TabsList className="h-auto flex flex-wrap items-center justify-start gap-2.5 bg-transparent p-0">
-                {tags.map((tag) => (
-                  <TabsTrigger
-                    key={tag}
-                    value={tag}
-                    className="rounded-full border border-border bg-transparent px-4 py-1.5 text-xs sm:text-sm text-muted-foreground shadow-none transition-colors data-[state=active]:border-brand/50 data-[state=active]:bg-brand/10 data-[state=active]:text-brand-text dark:data-[state=active]:border-brand/50 dark:data-[state=active]:bg-brand/10 dark:data-[state=active]:text-brand-text"
-                  >
-                    {tag}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
+              <Reveal delay={0.1}>
+                <TabsList className="h-auto flex flex-wrap items-center justify-start gap-2.5 bg-transparent p-0">
+                  {tags.map((tag) => (
+                    <TabsTrigger
+                      key={tag}
+                      value={tag}
+                      className="rounded-full border border-border bg-transparent px-4 py-1.5 text-xs sm:text-sm text-muted-foreground shadow-none transition-colors data-[state=active]:border-brand/50 data-[state=active]:bg-brand/10 data-[state=active]:text-brand-text dark:data-[state=active]:border-brand/50 dark:data-[state=active]:bg-brand/10 dark:data-[state=active]:text-brand-text"
+                    >
+                      {tag}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Reveal>
             )}
 
-            <Button asChild variant="outline" size="sm" className="gap-2 shrink-0 self-start sm:self-auto rounded-full border-border bg-background/80 hover:border-brand/50 hover:bg-brand/5 hover:text-brand-text">
-              <Link href="/projets">
-                Voir tous mes projets
-                <ArrowRight className="size-3.5" />
-              </Link>
-            </Button>
-          </div>
-        </Reveal>
-
-        <TabsContent value={activeTag} className="mt-8 pt-2">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {displayedProjects.map((project, index) => (
-              <Reveal key={project.title} delay={index * 0.08}>
-                <ProjectCard project={project} />
-              </Reveal>
-            ))}
-          </div>
-        </TabsContent>
-      </Tabs>
-    </Section>
+            <TabsContent value={activeTag} className="mt-6 pt-0">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {filteredProjects.map((project, index) => (
+                  <Reveal key={project.title} delay={index * 0.05}>
+                    <ProjectCard project={project} />
+                  </Reveal>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </Section>
+      </main>
+      <Footer />
+    </>
   )
 }
 

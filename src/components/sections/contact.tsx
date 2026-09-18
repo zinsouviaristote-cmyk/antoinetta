@@ -13,14 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { contact, profile } from "@/content/portfolio"
 
-// Pas de backend ici : le formulaire ouvre le client mail du visiteur via un
-// lien "mailto:" pré-rempli avec les champs saisis. Pour recevoir de vraies
-// soumissions sans dépendre d'un client mail (ex. Formspree, https://formspree.io) :
-//   1. Créez un formulaire sur le service choisi et récupérez son endpoint.
-//   2. Renseignez-le ci-dessous.
-//   3. Décommentez l'appel `fetch` dans `handleSubmit`.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- utilisé une fois décommenté dans handleSubmit
-const FORMSPREE_ENDPOINT = "" // ex. "https://formspree.io/f/abcdwxyz"
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xldblyaa"
 
 interface FormValues {
   name: string
@@ -47,6 +40,7 @@ function validate(values: FormValues) {
 export function ContactSection() {
   const [values, setValues] = useState<FormValues>(EMPTY_VALUES)
   const [errors, setErrors] = useState<Partial<FormValues>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const nameId = useId()
   const emailId = useId()
   const messageId = useId()
@@ -59,29 +53,45 @@ export function ContactSection() {
     }
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const nextErrors = validate(values)
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return
 
-    // --- Formspree (optionnel) ---
-    // if (FORMSPREE_ENDPOINT) {
-    //   fetch(FORMSPREE_ENDPOINT, {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    //     body: JSON.stringify(values),
-    //   })
-    // }
+    setIsSubmitting(true)
 
-    const subject = `Message de ${values.name} via le portfolio`
-    const body = `${values.message}\n\n— ${values.name} (${values.email})`
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          message: values.message,
+          _subject: `Message de ${values.name} via le portfolio`,
+        }),
+      })
 
-    toast.success("Merci, votre message est prêt à être envoyé")
-    setValues(EMPTY_VALUES)
-    setErrors({})
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'envoi")
+      }
+
+      toast.success("Merci ! Votre message a bien été envoyé.")
+      setValues(EMPTY_VALUES)
+      setErrors({})
+    } catch (error) {
+      toast.error(
+        "Oups, l'envoi a échoué. Réessayez ou écrivez-moi directement par email."
+      )
+      console.error(error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -194,8 +204,13 @@ export function ContactSection() {
               )}
             </div>
 
-            <Button type="submit" size="lg" className="self-start">
-              Envoyer le message
+            <Button
+              type="submit"
+              size="lg"
+              className="self-start"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Envoi en cours..." : "Envoyer le message"}
             </Button>
           </form>
         </Reveal>
