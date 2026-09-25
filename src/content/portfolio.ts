@@ -130,13 +130,13 @@ export const skills: SkillGroup[] = [
 
 export const projects: Project[] = [
   {
-    title: "Petits Savants",
-    description: "Site e-commerce de présentation de cahiers d'activités pour enfants.",
-    tags: ["Éducation", "Next.js", "Tailwind CSS", "TypeScript"],
-    live: "#",
-    github: "https://petits-savants-nine.vercel.app/",
-    image: null,
-    alt: "Aperçu du projet Petits Savants",
+    title: "SchoolFlow",
+    description: "Plateforme centralisée de gestion administrative et pédagogique pour les établissements scolaires.",
+    tags: ["SaaS", "Next.js", "Éducation", "Tailwind CSS", "TypeScript"],
+    live: "https://schoolflow-three.vercel.app",
+    github: "#",
+    image: "/images/schoolflow.png",
+    alt: "Aperçu de la plateforme SchoolFlow",
   },
   {
     title: "WellSteven",
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     tags: ["Site Vitrine", "Corporate", "Next.js", "TypeScript"],
     live: "https://www.wellsteven.com/",
     github: "#",
-    image: null,
+    image: "/images/well-steven.png",
     alt: "Aperçu du site WellSteven",
   },
   {
@@ -153,7 +153,7 @@ export const projects: Project[] = [
     tags: ["E-commerce", "Next.js", "React", "Tailwind CSS", "TypeScript"],
     live: "https://aure-a.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/aurea.png",
     alt: "Aperçu du projet Aure-a",
   },
   {
@@ -162,7 +162,7 @@ export const projects: Project[] = [
     tags: ["E-commerce", "Next.js", "Tailwind CSS", "TypeScript"],
     live: "https://luxhe-854g.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/luxhe.png",
     alt: "Aperçu du projet Luxhe",
   },
   {
@@ -171,17 +171,8 @@ export const projects: Project[] = [
     tags: ["Site Vitrine", "Next.js", "Tailwind CSS", "TypeScript"],
     live: "https://cefora.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/cefora.png",
     alt: "Aperçu du site CEFORA Formation",
-  },
-  {
-    title: "SchoolFlow",
-    description: "Plateforme centralisée de gestion administrative et pédagogique pour les établissements scolaires.",
-    tags: ["SaaS", "Next.js", "Éducation", "Tailwind CSS", "TypeScript"],
-    live: "https://schoolflow-three.vercel.app",
-    github: "#",
-    image: null,
-    alt: "Aperçu de la plateforme SchoolFlow",
   },
   {
     title: "Griot",
@@ -189,16 +180,26 @@ export const projects: Project[] = [
     tags: ["SaaS", "Next.js", "AI", "Tailwind CSS", "TypeScript"],
     live: "https://griot-six.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/griot.png",
     alt: "Aperçu de la plateforme Griot",
   },
+  {
+    title: "Petits Savants",
+    description: "Site e-commerce de présentation de cahiers d'activités pour enfants.",
+    tags: ["Éducation", "Next.js", "Tailwind CSS", "TypeScript"],
+    live: "https://petits-savants-nine.vercel.app/",
+    github: "#",
+    image: "/images/petits-savants.png",
+    alt: "Aperçu du projet Petits Savants",
+  },
+  
   {
     title: "CamionGo",
     description: "Plateforme de mise en relation et de gestion logistique pour le transport de marchandises.",
     tags: ["SaaS", "Next.js", "React", "Tailwind CSS", "TypeScript"],
     live: "https://camion-go.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/camion.png",
     alt: "Aperçu de la plateforme CamionGo",
   },
   {
@@ -207,7 +208,7 @@ export const projects: Project[] = [
     tags: ["SaaS", "Immobilier", "Next.js", "Tailwind CSS", "TypeScript"],
     live: "https://www.immo-benin.com/",
     github: "#",
-    image: null,
+    image: "/images/immo.png",
     alt: "Aperçu de la plateforme Immo-Benin",
   },
   {
@@ -216,7 +217,7 @@ export const projects: Project[] = [
     tags: ["SaaS", "Next.js", "Services", "Tailwind CSS", "TypeScript"],
     live: "https://antoinettaams-benin-allo.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/allo-benin.png",
     alt: "Aperçu de la plateforme Allô-Bénin",
   },
   {
@@ -225,16 +226,16 @@ export const projects: Project[] = [
     tags: ["SaaS", "Marketing", "Dashboard", "Next.js", "TypeScript"],
     live: "https://savads.vercel.app",
     github: "#",
-    image: null,
+    image: "/images/sav-ads.png",
     alt: "Aperçu de la plateforme Sav-Ads",
   },
   {
     title: "Café Antoine",
     description: "Site web élégant et immersif conçu pour valoriser les services et l'ambiance du restaurant Café Antoine.",
     tags: ["Site Vitrine", "Next.js", "Tailwind CSS", "TypeScript"],
-    live: "https://caf-antoine-3xfz.vercel.app/",
+    live: "https://caf-antoine-woad.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/cafe-antoine.png",
     alt: "Aperçu du site Café Antoine",
   },
   {
@@ -243,7 +244,7 @@ export const projects: Project[] = [
     tags: ["Site Vitrine", "Agriculture", "React", "Tailwind CSS", "TypeScript"],
     live: "https://ferme-saveur-nature.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/saveurs-nature.png",
     alt: "Aperçu du site Ferme Saveur & Nature",
   },
   {
@@ -252,7 +253,7 @@ export const projects: Project[] = [
     tags: ["E-commerce", "React", "Tailwind CSS", "JavaScript"],
     live: "https://velors-three.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/velors.png",
     alt: "Aperçu de Velors Insoles",
   },
   {
@@ -261,7 +262,7 @@ export const projects: Project[] = [
     tags: ["E-commerce", "Next.js", "Tailwind CSS", "TypeScript"],
     live: "https://ramadan-opal-theta.vercel.app//",
     github: "#",
-    image: null,
+    image: "/images/ramadan.png",
     alt: "Aperçu de Ramadan",
   },
   {
@@ -270,7 +271,7 @@ export const projects: Project[] = [
     tags: ["E-commerce", "Next.js", "Tailwind CSS", "TypeScript"],
     live: "https://aliver-mu.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/aliver.png",
     alt: "Aliver",
   },
   {
@@ -279,21 +280,19 @@ export const projects: Project[] = [
     tags: ["Landing Page", "Design", "React", "Tailwind CSS", "TypeScript"],
     live: "https://cocoon-coral.vercel.app/",
     github: "#",
-    image: null,
+    image: "/images/cocoon.png",
     alt: "Cocoon",
   },
-  
   {
     title: "Inhalo",
     description: "Landing page e-commerce de présentation d'inhalateur sans produits adictifs.",
     tags: ["Landing Page", "Design", "React", "Tailwind CSS", "TypeScript"],
     live: "https://inhalo.vercel.app",
     github: "#",
-    image: null,
+    image: "/images/inhalo.png",
     alt: "Inhalo",
   },
 ]
-
 export const experience: ExperienceEntry[] = [
   {
     period: "2024 — Aujourd'hui",

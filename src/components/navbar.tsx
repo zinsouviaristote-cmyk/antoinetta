@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"  // 👈 ajout
 import { Menu } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 import { cn } from "cn"
@@ -32,6 +33,10 @@ export function Navbar() {
   const shouldReduceMotion = useReducedMotion()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()  // 👈 récupère la page actuelle
+
+  // On est sur la page d'accueil ?
+  const isHome = pathname === "/"
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -39,6 +44,9 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
+
+  // Construit le href selon la page actuelle
+  const buildHref = (id: string) => (isHome ? `#${id}` : `/#${id}`)
 
   return (
     <header
@@ -64,11 +72,12 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-6 md:flex" aria-label="Navigation principale">
           {NAV_ITEMS.map(({ id, label }) => {
-            const isActive = activeId === id
+            // Sur une autre page, aucune section n'est active
+            const isActive = isHome && activeId === id
             return (
               <a
                 key={id}
-                href={`#${id}`}
+                href={buildHref(id)}  // 👈 utilise buildHref
                 aria-current={isActive ? "true" : undefined}
                 className={cn(
                   "relative rounded-sm px-1 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -120,11 +129,11 @@ export function Navbar() {
                 aria-label="Navigation mobile"
               >
                 {NAV_ITEMS.map(({ id, label }) => {
-                  const isActive = activeId === id
+                  const isActive = isHome && activeId === id
                   return (
                     <a
                       key={id}
-                      href={`#${id}`}
+                      href={buildHref(id)}  // 👈 utilise buildHref
                       onClick={() => setOpen(false)}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
