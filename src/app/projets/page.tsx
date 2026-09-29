@@ -1,9 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
-import { ExternalLink, ImageOff, ArrowLeft } from "lucide-react"
+import { ExternalLink, ArrowLeft } from "lucide-react"
 
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -38,7 +37,6 @@ const LANGUAGE_TAGS = [
 ]
 
 export default function AllProjectsPage() {
-  // Sélectionne uniquement les filtres de langages présents dans tes projets
   const tags = useMemo(() => {
     const unique = new Set<string>()
     for (const project of projects) {
@@ -53,7 +51,6 @@ export default function AllProjectsPage() {
 
   const [activeTag, setActiveTag] = useState(ALL_TAG)
 
-  // Filtrage selon le langage sélectionné
   const filteredProjects =
     activeTag === ALL_TAG
       ? projects
@@ -64,7 +61,6 @@ export default function AllProjectsPage() {
       <Navbar />
       <main className="min-h-screen pb-12">
         <Section id="all-projects" className="pt-2 sm:pt-4">
-          {/* Bouton retour vers la page d'accueil */}
           <Reveal>
             <div className="mb-4">
               <Button
@@ -128,28 +124,6 @@ export default function AllProjectsPage() {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <Card className="group flex h-full flex-col gap-0 overflow-hidden border-border/70 bg-card/60 py-0 transition-all duration-300 hover:-translate-y-1.5 hover:border-brand/50 hover:shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--brand)_55%,transparent)]">
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
-        {project.image ? (
-          <Image
-            src={project.image}
-            alt={project.alt}
-            fill
-            sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 border-b border-dashed border-border bg-[repeating-linear-gradient(135deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] px-6 text-center">
-            <span className="flex size-10 items-center justify-center rounded-full bg-background/80 text-muted-foreground">
-              <ImageOff className="size-5" />
-            </span>
-            <p className="text-xs text-muted-foreground">{project.alt}</p>
-            <Badge variant="outline" className="border-border bg-background/80 font-normal text-muted-foreground">
-              Aperçu à venir
-            </Badge>
-          </div>
-        )}
-      </div>
-
       <CardHeader className="gap-1.5 pt-5">
         <CardTitle className="text-base">{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
